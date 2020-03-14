@@ -18,7 +18,7 @@ script:
 - sudo ./run.sh
 
 after_success:
-- buildah push buildah-vfs:latest docker://quay.io/$quayiouser/buildah-vfs:latest
+- sudo buildah push buildah-vfs:latest docker://quay.io/$quayiouser/buildah-vfs:latest
 
 after_script:
 - buildah logout quay.io
