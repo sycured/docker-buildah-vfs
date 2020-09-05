@@ -15,10 +15,13 @@ addons:
 
 script:
 - echo $quayiopassword | buildah login -u $quayiouser --password-stdin quay.io
+- echo $githubtoken | buildah login -u $githublogin --password-stdin docker.pkg.github.com
 - sudo ./run.sh
 
 after_success:
 - sudo buildah push buildah-vfs:latest docker://quay.io/$quayiouser/buildah-vfs:latest
+- sudo buildah push buildah-vfs:latest docker://docker.pkg.github.com/$githublogin/docker-buildah-vfs/buildah-vfs:latest
 
 after_script:
 - buildah logout quay.io
+- buildah logout docker.pkg.github.com
